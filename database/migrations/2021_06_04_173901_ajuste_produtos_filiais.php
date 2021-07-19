@@ -35,7 +35,7 @@ class AjusteProdutosFiliais extends Migration
         });
 
         //removendo colunas da tabela produtos
-        Schema::create('produtos', function (Blueprint $table){
+        Schema::table('produtos', function (Blueprint $table){
             $table->dropColumn(['preco_venda', 'estoque_minimo', 'estoque_maximo']);
         });
 
@@ -49,7 +49,7 @@ class AjusteProdutosFiliais extends Migration
     public function down()  //fazer o oposto e na ordem inversa
     {
         //adicionar colunas da tabela produtos
-        Schema::create('produtos', function (Blueprint $table){
+        Schema::table('produtos', function (Blueprint $table){
             $table->decimal('preco_venda', 8, 2);
             $table->integer('estoque_minimo');
             $table->integer('estoque_maximo');
