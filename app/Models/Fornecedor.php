@@ -12,4 +12,5 @@ class Fornecedor extends Model
     //trocando o nome da tabela, para não dar erro no Eloquent, 
     //que reconheceria o nome como fornecedors
     protected $table = 'fornecedores';
+    protected $fillable = ['nome', 'site', 'uf', 'email'];
 }
