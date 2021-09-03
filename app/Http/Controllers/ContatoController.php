@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SiteContato;
 use Illuminate\Http\Request;
+use App\Models\MotivoContato;
 
 class ContatoController extends Controller
 {
@@ -37,19 +38,27 @@ class ContatoController extends Controller
         // $contato = new SiteContato();
         // $contato->create($request->all());
 
-        return view('site.contato', ['titulo' => 'Contato {teste}']);
+        // $motivo_contatos = [
+        //     '1' => 'Dúvida',
+        //     '2' => 'Elogio',
+        //     '3' => 'Reclamação'
+        // ];
+
+        $motivo_contatos = MotivoContato::all();
+
+
+        return view('site.contato', ['titulo' => 'Contato {teste}', 'motivo_contatos' => $motivo_contatos]);
     }
 
     public function salvar(Request $request) {
 
         // antes precisa realizar a validação dos dados. Para que o erro seja compreensivel ao usuario
-
         $request->validate([
-            'nome' => 'required',
+            'nome' => 'min:3|max:40',
             'telefone' => 'required',
             'email' => 'required',
             'motivo_contato' => 'required',
-            'mensagem' => 'required',
+            'mensagem' => 'required|max:2000',
         ]);
         // SiteContato::create($request->all());
         // return view('site.contato', ['titulo' => 'Contato {teste}']);
