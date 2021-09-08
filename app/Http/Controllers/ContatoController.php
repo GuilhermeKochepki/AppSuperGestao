@@ -46,7 +46,6 @@ class ContatoController extends Controller
 
         $motivo_contatos = MotivoContato::all();
 
-
         return view('site.contato', ['titulo' => 'Contato {teste}', 'motivo_contatos' => $motivo_contatos]);
     }
 
@@ -56,7 +55,7 @@ class ContatoController extends Controller
         $request->validate([
             'nome' => 'min:3|max:40',
             'telefone' => 'required',
-            'email' => 'required',
+            'email' => 'email',
             'motivo_contato' => 'required',
             'mensagem' => 'required|max:2000',
         ]);
