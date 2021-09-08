@@ -76,6 +76,7 @@ class ContatoController extends Controller
         ];
         
         $request->validate($regras, $feedback);
+        
         SiteContato::create($request->all());
         //esse comando habilita a persistencia dos dados no banco  
 
