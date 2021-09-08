@@ -2,15 +2,22 @@
 
 <form action={{ route('site.contato') }} method="post">
     @csrf
+
+    {{ ($errors->has('nome')) ?  $errors->first('nome') : ''}}
     <input name="nome" value="{{ old('nome')}}" type="text" placeholder="Nome" class="{{ $classe }}">
     <br>
+
+    {{ ($errors->has('telefone')) ?  $errors->first('telefone') : ''}}
     <input name="telefone" value="{{ old('telefone')}}" type="text" placeholder="Telefone" class="{{ $classe }}">
     <br>
+
+    {{ ($errors->has('email')) ?  $errors->first('email') : ''}}
     <input name="email" value="{{ old('email')}}" type="text" placeholder="E-mail" class="{{ $classe }}">
     <br>
 
     {{-- {{ print_r($motivo_contatos) }} --}}
 
+    {{ ($errors->has('motivo_contatos_id')) ?  $errors->first('motivo_contatos_id') : ''}}
     <select name="motivo_contatos_id" class="{{ $classe }}">
         <option value="">Qual o motivo do contato?</option>
 
@@ -28,13 +35,19 @@
         --}}
     </select>
     <br>
+
+    {{ ($errors->has('mensagem')) ?  $errors->first('mensagem') : ''}}
     <textarea name="mensagem" placeholder="Preencha aqui sua mensagem" class="{{ $classe }}">{{old('mensagem')}}</textarea>
     <br>
     <button type="submit" class="{{ $classe }}">ENVIAR</button>
 </form>
 
-<div style="position: absolute; top: 0px; left: 0px; width: 100%; background: red">
-    <pre>
-        {{ print_r($errors) }}
-    </pre>
-</div>
+{{-- @if($errors->any())
+    <div style="position: absolute; top: 0px; left: 0px; width: 100%; background: red">
+        
+        @foreach($errors->all() as $erro)
+            {{ $erro }}<br>
+        @endforeach
+
+    </div>
+@endif --}}
