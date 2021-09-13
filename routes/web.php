@@ -6,7 +6,7 @@ use App\Http\Controllers\SobreNosController;
 use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\TesteController;
 use App\Http\Controllers\FornecedorController;
-use App\Http\Middleware\LogAcessoMiddleware;
+use App\Middleware\Kernel;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,14 +25,11 @@ Route::'get('/', function () {
 });
 */
 
-Route::middleware(LogAcessoMiddleware::class)
-    ->get('/', [PrincipalController::class,'principal'])
-    ->name('site.index')
-    ;
+Route::get('/', [PrincipalController::class,'principal'])->name('site.index')->middleware('log.acesso');
+
 Route::get('/sobre-nos', [SobreNosController::class,'sobreNos'])->name('site.sobrenos');
-Route::middleware(LogAcessoMiddleware::class)
-    ->get('/contato', [ContatoController::class,'contato'])
-    ->name('site.contato');
+Route::get('/contato', [ContatoController::class,'contato'])->name('site.contato');
+
 Route::post('/contato', [ContatoController::class,'salvar'])->name('site.contato');
 Route::get('/login', function(){ return 'Login'; })->name('site.login');
 
